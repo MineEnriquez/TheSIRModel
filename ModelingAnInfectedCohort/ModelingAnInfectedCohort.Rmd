@@ -1,0 +1,31 @@
+---
+title: "R Notebook"
+output: html_notebook
+---
+```{r}
+library(deSolve)
+library(reshape2)
+library(ggplot2)
+print("Loading libraries: deSolve, reshape2, ggplot2")
+```
+```{r}
+print("initializing variables:")
+#A set of currently infected people:
+initial_number_infected <- 1000000
+
+# At the beginning of the simulation, no one has recovered:
+initial_number_recovered <- 0
+
+# Recovery rate:
+# this is, the avera duration spent in the compartment is 10 days,
+# so: rate of recovery = 1/10 days 
+# or 0.1 per day
+recovery_rate <- 1/10
+
+
+```
+# Below (simple ploting example with 'cars' data from R )
+```{r}
+plot(cars)
+```
+
