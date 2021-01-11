@@ -13,14 +13,14 @@ follow_up_duration = 4*7
 initial_state_values <- c(I = initial_number_infected,
                           R = initial_number_recovered)
 parameteres <- c(gamma = recovery_rate)
-times <- seq.default(from = 1, to = follow_up_duration, by = 1)
+times <- seq.default(from = 0, to = follow_up_duration, by = 1)
 
 # Model Function:
 
 cohort_model <- function(time, state, parameters){
   with(as.list(c(state, parameters)), {
     # Differential Equations
-    dI <- gamma*I*(-1)
+    dI <- -gamma*I
     dR <- gamma*I
     return(list(c(dI, dR)))
   })
@@ -35,3 +35,24 @@ output <- as.data.frame(ode(y = initial_state_values,
                             parms = parameteres))
 #printing output
 output
+
+# 1.0.1 Based on the output, how many people have recovered abter 4 weeks?
+
+# the statement below will print the "time" and the "R" output when the timestep
+# is equals 28.
+#
+output[output$time == 28, c("time", "R")]
+
+# 1.0.2 What portion of the population does this correspond to?
+# (a) - Method 1:
+output[output$time == 28, "R"] * 100 / initial_number_infected
+
+#(b) - Method 2: Divide the number of recovered peopleat the 4th week  timestep 
+# by the total population size calculated using the values on the data.frame ()
+# NOTE: we are assuming in this simulation that there is no births or deadths in our model,
+# the total population size is the same at each timestep, so we could also
+
+output[output$time == 28, "R"] / (output[output$time == 28, "I"] + output[output$time == 28, "R"])
+
+
+
