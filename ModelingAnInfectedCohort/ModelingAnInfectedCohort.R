@@ -12,7 +12,7 @@ follow_up_duration = 4*7
 # Input Vectors
 initial_state_values <- c(I = initial_number_infected,
                           R = initial_number_recovered)
-parameteres <- c(gamma = recovery_rate)
+parameters <- c(gamma = recovery_rate)
 times <- seq.default(from = 0, to = follow_up_duration, by = 1)
 
 # Model Function:
@@ -32,7 +32,7 @@ cohort_model <- function(time, state, parameters){
 output <- as.data.frame(ode(y = initial_state_values,
                             times = times,
                             func = cohort_model,
-                            parms = parameteres))
+                            parms = parameters))
 #printing output
 output
 
@@ -55,4 +55,17 @@ output[output$time == 28, "R"] * 100 / initial_number_infected
 output[output$time == 28, "R"] / (output[output$time == 28, "I"] + output[output$time == 28, "R"])
 
 
+# Plotting the output:
 
+# For consistency, convert the dataset into a long format
+# (so that the number in each compartment at each timestep are all in the same column)
+
+output_long <- melt(as.data.frame(output), id = "time")
+
+ggplot(data = output_long,
+       aes(x=time, y=value, colour = variable, group = variable)) + 
+geom_line() +
+xlab("Time (days)") +
+  ylab("Number of people") + 
+  labs(title = paste("Number infected and recovered over time when gama =", 
+                     parameters["gamma"], "days^-1"))
