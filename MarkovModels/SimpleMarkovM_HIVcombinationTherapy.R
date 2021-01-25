@@ -66,4 +66,26 @@ mat_comb
 plot(mat_comb)
 
 
+# ======================
+# STATE VALUES
+# ======================
 
+# Costs of drugs: lamivudine, zidovudine
+cost_zido <- 2278
+cost_lami <- 2086
+
+# Costs: drugs, healthcare - minus 6% discount.
+
+# STATE A
+# =========
+state_A <- define_state(
+  cost_health = discount(2756, .06),
+  cost_drugs = discount(dispatch_strategy(
+    mono = cost_zido,
+    comb = cost_zido + cost_lami
+  ), .060,
+  cost_total = cost_health + cost_drugs,
+  life_year = 1
+  ))
+  
+  state_A
