@@ -89,3 +89,35 @@ state_A <- define_state(
   ))
   
   state_A
+
+  # STATE B
+  # =========
+  state_B <- define_state(
+    cost_health = discount(3052, .06),
+    cost_drugs = discount(dispatch_strategy(
+      mono = cost_zido,
+      comb = cost_zido + cost_lami
+    ), .060,
+    cost_total = cost_health + cost_drugs,
+    life_year = 1
+    ))
+  
+  state_B
+  
+  
+  # STATE C
+  # =========
+  state_C <- define_state(
+    cost_health = discount(9007, .06),
+    cost_drugs = discount(dispatch_strategy(
+      mono = cost_zido,
+      comb = cost_zido + cost_lami
+    ), .060,
+    cost_total = cost_health + cost_drugs,
+    life_year = 1
+    ))
+  
+  state_C
+
+  
+  
