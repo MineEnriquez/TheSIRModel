@@ -83,10 +83,10 @@ state_A <- define_state(
   cost_drugs = discount(dispatch_strategy(
     mono = cost_zido,
     comb = cost_zido + cost_lami
-  ), .060,
+  ), .060),
   cost_total = cost_health + cost_drugs,
   life_year = 1
-  ))
+  )
   
   state_A
 
@@ -97,10 +97,10 @@ state_A <- define_state(
     cost_drugs = discount(dispatch_strategy(
       mono = cost_zido,
       comb = cost_zido + cost_lami
-    ), .060,
+    ), .060),
     cost_total = cost_health + cost_drugs,
     life_year = 1
-    ))
+    )
   
   state_B
   
@@ -112,12 +112,38 @@ state_A <- define_state(
     cost_drugs = discount(dispatch_strategy(
       mono = cost_zido,
       comb = cost_zido + cost_lami
-    ), .060,
+    ), .060),
     cost_total = cost_health + cost_drugs,
     life_year = 1
-    ))
+    )
   
   state_C
 
   
+  # STATE D
+  # =========
+  state_D <- define_state(
+    cost_health = 0,
+    cost_drugs = 0,
+    cost_total = 0,
+    life_year = 0
+  )
   
+  state_D
+  
+  
+  # ==========================
+  # STRATEGY DEFINITIONS
+  # =========================
+  
+  strat_mono <- define_strategy(
+    transition = mat_mono,
+    state_A,
+    state_B,
+    state_C,
+    state_D
+  )
+  
+  ## No named state ->  generating names
+  
+  strat_mono
