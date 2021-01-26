@@ -1,3 +1,8 @@
+#Install packages
+#install.packages("deSolve")
+#install.packages("reshape2")
+#install.packages("ggplot2")
+
 # Libraries
 library(deSolve)
 library(reshape2)
