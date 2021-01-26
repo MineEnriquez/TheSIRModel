@@ -205,5 +205,29 @@ state_A <- define_state(
       palette = "Set4"
     )
   
-
+  #===============================================
+  # Values represented
+  #===============================================
+  plot(res_mod,
+       type = "values",
+       panel = "by_value",
+       free_y = TRUE) + 
+    xlab("Time") +
+    theme_gray() + 
+    scale_color_brewer(
+      name = "Strategy",
+      palette = "Set2" )
+  
+  #===============================================
+  
+  plot(res_mod, 
+       type="values",
+       panels = c("by_value"),
+       values = NULL,
+       strategy = NULL,
+       states = NULL,
+       free_y = FALSE,
+       bw = FALSE
+  )
+  
   
