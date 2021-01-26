@@ -29,7 +29,6 @@ mat_mono <- define_transition(
   0,    .581, .407, .012,
   0, 0, .750, .250,
   0, 0, 0, 1)
-## No named state --> generating names
 
 ## MONOTHERAPY
 mat_mono
@@ -58,8 +57,6 @@ mat_comb <- define_transition(
   0,  C, .407*rr, .012*rr,
   0, 0, C, .250*rr,
   0, 0, 0, 1)
-
-## No named state --> generating names
 
 mat_comb
 
@@ -144,6 +141,38 @@ state_A <- define_state(
     state_D
   )
   
-  ## No named state ->  generating names
-  
   strat_mono
+  
+  #========================
+  # COMBINED THERAPY MODEL
+  #========================
+  
+  strat_comb <- define_strategy(
+    transition = mat_comb,
+    state_A,
+    state_B,
+    state_C,
+    state_D
+  )
+  
+  
+  #=====================
+  # RUNNING THE MODEL
+  #=====================
+  
+  res_mod <- run_model(
+    mono = strat_mono,
+    comb = strat_comb,
+    cycles = 50,
+    cost = cost_total,
+    effect = life_year
+  )
+  
+  
+  #=============================================
+  # COMPARING THE STRATEGIES (WITH SUMMARY)
+  #=============================================
+  summary(res_mod,
+          threshold = c(1000, 5000, 6000, 1e4))
+  
+  
