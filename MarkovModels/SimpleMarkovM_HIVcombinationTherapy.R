@@ -175,4 +175,35 @@ state_A <- define_state(
   summary(res_mod,
           threshold = c(1000, 5000, 6000, 1e4))
   
+  # ==================================================================
+  #  NOTES ABOUT THE RESULT OF RUNNING THE SCRIPT UP TO THIS POINT
+  # ==================================================================
+  
+  # The incremental cost-effectiveness ratio of the combined therapy
+  # strategy is thus 5,00 per life-year gained.
+  
+  # ==============================================
+  # Counts per state  (plotted by model)
+  # ==============================================
+  
+  plot (res_mod, type = "counts", panel = "by_strategy") +
+    xlab("Time") + 
+    theme_dark() + 
+    scale_color_brewer(
+      name = "State",
+      palette = "Set1"
+   )
+  
+  # ==============================================
+  # Counts per model  (plotted by state)
+  # ==============================================
+  plot (res_mod, type = "counts", panel = "by_state") +
+    xlab("Time") + 
+    theme_dark() + 
+    scale_color_brewer(
+      name = "Strategy",
+      palette = "Set4"
+    )
+  
+
   
